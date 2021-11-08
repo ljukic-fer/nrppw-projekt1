@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="map" style="height: 500px; width: 50%; margin-top: 50px; float: left; position: relative; outline: none">
+
+    </div>
+    <script>
+
+        navigator.geolocation.getCurrentPosition((pos) => {
+            this.state = {
+                location: {
+                    lat: pos.coords.latitude,
+                    lon: pos.coords.longitude
+                }
+            }
+
+            var position = [this.state.location.lat, this.state.location.lon]
+
+            var map = L.map('map').setView(position, 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            L.marker(position).addTo(map)
+                .bindPopup('Your current location')
+                .openPopup();
+
+            document.getElementById("currLat").innerHTML = this.state.location.lat;
+            document.getElementById("currLon").innerHTML = this.state.location.lon;
+        });
+
+
+    </script>
+
+    <div style="margin-left: 60%; height: 500px">
+        Your current location is: <br> <br>
+        &emsp; LATITUDE: <span id="currLat"></span> <br>
+        &emsp; LONGITUDE: <span id="currLon"></span>
+        <br> <br> <br>
+        Press button to log in <br>
+        <form action="login" method="get">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+
+</html>
