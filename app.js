@@ -10,7 +10,7 @@ app.set('views','views')
 require("dotenv").config();
 
 const port =
-  env === "development" ? process.env.DEV_PORT : process.env.PROD_PORT;
+  env === "development" ? process.env.DEV_PORT : process.env.PROD_PORT || process.env.PORT;
 
 //app.listen(8080)
 
